@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="{% block meta_description %}بارتي ماجيك - شركة متخصصة في تنظيم حفلات أعياد الميلاد والسبوع للأطفال في مصر، مع أفضل الشخصيات الكرتونية والماسكات{% endblock %}">
+    <meta name="theme-color" content="#FF6B6B">
+    <title>{% block title %}بارتي ماجيك 🎉 | حفلات الأطفال والماسكات في مصر{% endblock %}</title>
+
+    <!-- Favicon - emoji-based -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎉</text></svg>">
+
+    <!-- Google Fonts: Cairo (Arabic), Fredoka, Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'cairo': ['Cairo', 'sans-serif'],
+                        'fredoka': ['Fredoka', 'sans-serif'],
+                        'nunito': ['Nunito', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#FF6B6B',
+                        secondary: '#4ECDC4',
+                        accent: '#FFE66D',
+                        magic: '#A855F7',
+                        cream: '#FFF9F0',
+                        midnight: '#0D0D1A',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-slow': 'float 8s ease-in-out infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                        'wiggle': 'wiggle 2s ease-in-out infinite',
+                        'bounce-slow': 'bounce 3s infinite',
+                        'pop': 'pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-20px) rotate(2deg)' },
+                        },
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-3deg)' },
+                            '50%': { transform: 'rotate(3deg)' },
+                        },
+                        pop: {
+                            '0%': { transform: 'scale(0.8)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- AOS - Animate On Scroll -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    {% block head_extra %}{% endblock %}
+</head>
+<body class="font-cairo bg-cream text-gray-800 overflow-x-hidden">
+
+    <!-- Page Loader -->
+    <div id="page-loader" class="fixed inset-0 z-[9999] flex items-center justify-center bg-gradient-to-br from-primary via-magic to-secondary">
+        <div class="text-center">
+            <div class="loader-spinner text-7xl animate-bounce">🎉</div>
+            <div class="text-white mt-4 font-fredoka text-2xl tracking-wider">جاري التحميل...</div>
+            <div class="loader-bar mt-4 mx-auto"><div class="loader-progress"></div></div>
+        </div>
+    </div>
+
+    <!-- Floating Background Decorations -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10">
+        <div class="bg-blob blob-1"></div>
+        <div class="bg-blob blob-2"></div>
+        <div class="bg-blob blob-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between bg-white/80 backdrop-blur-lg rounded-full px-6 py-3 shadow-lg border border-white/50">
+                <!-- Logo -->
+                <a href="/" class="flex items-center gap-2 group">
+                    <span class="text-3xl group-hover:rotate-12 transition-transform">🎉</span>
+                    <span class="font-fredoka text-xl bg-gradient-to-r from-primary via-magic to-secondary bg-clip-text text-transparent font-bold">
+                        Party Magic
+                    </span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <ul class="hidden lg:flex items-center gap-1">
+                    <li><a href="/" class="nav-link {% if active_page == 'home' %}active{% endif %}">الرئيسية</a></li>
+                    <li><a href="/services" class="nav-link {% if active_page == 'services' %}active{% endif %}">الخدمات</a></li>
+                    <li><a href="/characters" class="nav-link {% if active_page == 'characters' %}active{% endif %}">الشخصيات</a></li>
+                    <li><a href="/gallery" class="nav-link {% if active_page == 'gallery' %}active{% endif %}">المعرض</a></li>
+                    <li><a href="/contact" class="nav-link {% if active_page == 'contact' %}active{% endif %}">تواصل معنا</a></li>
+                </ul>
+
+                <!-- CTA -->
+                <div class="flex items-center gap-2">
+                    <a href="/booking" class="hidden md:inline-flex items-center gap-2 bg-gradient-to-r from-primary to-magic text-white px-6 py-2.5 rounded-full font-bold hover:scale-105 transition-transform shadow-lg hover:shadow-primary/50">
+                        <i class="fas fa-calendar-plus"></i>
+                        احجز الآن
+                    </a>
+                    <button id="mobile-menu-btn" class="lg:hidden text-2xl text-primary p-2" aria-label="القائمة">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="lg:hidden fixed inset-0 z-40 bg-gradient-to-br from-primary/95 via-magic/95 to-secondary/95 backdrop-blur-lg flex items-center justify-center transform translate-x-full transition-transform duration-500">
+            <button id="mobile-close" class="absolute top-6 left-6 text-white text-3xl" aria-label="إغلاق">
+                <i class="fas fa-times"></i>
+            </button>
+            <ul class="text-center space-y-6">
+                <li><a href="/" class="text-white text-3xl font-fredoka hover:text-accent transition">الرئيسية</a></li>
+                <li><a href="/services" class="text-white text-3xl font-fredoka hover:text-accent transition">الخدمات</a></li>
+                <li><a href="/characters" class="text-white text-3xl font-fredoka hover:text-accent transition">الشخصيات</a></li>
+                <li><a href="/gallery" class="text-white text-3xl font-fredoka hover:text-accent transition">المعرض</a></li>
+                <li><a href="/contact" class="text-white text-3xl font-fredoka hover:text-accent transition">تواصل معنا</a></li>
+                <li class="pt-4">
+                    <a href="/booking" class="inline-block bg-accent text-midnight px-8 py-3 rounded-full font-bold text-xl shadow-2xl">
+                        🎈 احجز حفلتك
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/{{ whatsapp }}" target="_blank" rel="noopener"
+       class="fixed bottom-6 left-6 z-40 w-14 h-14 md:w-16 md:h-16 bg-green-500 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform animate-bounce-slow whatsapp-fab"
+       aria-label="تواصل واتساب">
+        <i class="fab fa-whatsapp text-3xl"></i>
+        <span class="ping"></span>
+    </a>
+
+    <!-- Main Content -->
+    <main class="min-h-screen pt-24">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative bg-gradient-to-br from-midnight via-purple-900 to-midnight text-white pt-20 pb-8 mt-20 overflow-hidden">
+        <!-- Decorative bubble -->
+        <div class="absolute top-0 left-0 right-0 -translate-y-1/2">
+            <svg viewBox="0 0 1440 120" class="w-full h-auto" preserveAspectRatio="none">
+                <path fill="#0D0D1A" d="M0,40 Q360,120 720,60 T1440,60 L1440,120 L0,120 Z"/>
+            </svg>
+        </div>
+
+        <!-- Floating decorations -->
+        <div class="absolute top-12 right-10 text-4xl opacity-20 animate-float">🎈</div>
+        <div class="absolute top-32 left-20 text-5xl opacity-20 animate-float-slow">🎂</div>
+        <div class="absolute bottom-20 right-1/4 text-4xl opacity-20 animate-float">🎁</div>
+        <div class="absolute bottom-40 left-1/3 text-3xl opacity-20 animate-float-slow">⭐</div>
+
+        <div class="container mx-auto px-4 relative">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="text-4xl">🎉</span>
+                        <span class="font-fredoka text-2xl bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent font-bold">Party Magic</span>
+                    </div>
+                    <p class="text-white/70 leading-relaxed">
+                        نُحوّل أحلام أطفالك إلى ذكريات لا تُنسى. متخصصون في حفلات أعياد الميلاد، السبوع، والماسكات الكرتونية.
+                    </p>
+                    <div class="flex gap-3 mt-5">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-fredoka text-xl mb-5 text-accent">روابط سريعة</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="/" class="text-white/70 hover:text-accent transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs"></i> الرئيسية</a></li>
+                        <li><a href="/services" class="text-white/70 hover:text-accent transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs"></i> الخدمات والباقات</a></li>
+                        <li><a href="/characters" class="text-white/70 hover:text-accent transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs"></i> الشخصيات</a></li>
+                        <li><a href="/gallery" class="text-white/70 hover:text-accent transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs"></i> معرض الصور</a></li>
+                        <li><a href="/booking" class="text-white/70 hover:text-accent transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs"></i> احجز الآن</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="font-fredoka text-xl mb-5 text-accent">خدماتنا</h4>
+                    <ul class="space-y-2.5">
+                        <li class="text-white/70 flex items-center gap-2"><span>🎂</span> حفلات أعياد الميلاد</li>
+                        <li class="text-white/70 flex items-center gap-2"><span>👶</span> حفلات السبوع</li>
+                        <li class="text-white/70 flex items-center gap-2"><span>🎭</span> ماسكات وشخصيات</li>
+                        <li class="text-white/70 flex items-center gap-2"><span>✨</span> تزيين الحفلات</li>
+                        <li class="text-white/70 flex items-center gap-2"><span>📸</span> تصوير احترافي</li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-fredoka text-xl mb-5 text-accent">تواصل معنا</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-phone text-secondary mt-1"></i>
+                            <a href="tel:{{ phone }}" class="text-white/70 hover:text-accent transition" dir="ltr">{{ phone }}</a>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fab fa-whatsapp text-green-400 mt-1"></i>
+                            <a href="https://wa.me/{{ whatsapp }}" target="_blank" class="text-white/70 hover:text-accent transition">واتساب</a>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-envelope text-magic mt-1"></i>
+                            <a href="mailto:{{ email }}" class="text-white/70 hover:text-accent transition" dir="ltr">{{ email }}</a>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt text-primary mt-1"></i>
+                            <span class="text-white/70">{{ address }}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom -->
+            <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/60">
+                <p>© {{ year }} Party Magic. جميع الحقوق محفوظة.</p>
+                <p>صُنع بـ <span class="text-primary animate-pulse">❤</span> لإسعاد أطفالكم</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="/static/js/main.js"></script>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

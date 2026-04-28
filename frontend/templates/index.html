@@ -1,0 +1,482 @@
+{% extends "base.html" %}
+
+{% block title %}بارتي ماجيك 🎉 | الموقع الأول لحفلات الأطفال والماسكات في مصر{% endblock %}
+
+{% block content %}
+
+<!-- ===================== HERO SECTION ===================== -->
+<section class="hero-bg relative pt-12 pb-20 overflow-hidden">
+    <div class="hero-grid-bg"></div>
+
+    <!-- Floating Decoration Mascots -->
+    <div class="hero-mascot" style="top: 8%; right: 5%; font-size: 4rem;">🎈</div>
+    <div class="hero-mascot" style="top: 20%; left: 8%; font-size: 5rem; animation-delay: -2s;">🎂</div>
+    <div class="hero-mascot" style="bottom: 15%; right: 12%; font-size: 4.5rem; animation-delay: -4s;">🎁</div>
+    <div class="hero-mascot" style="top: 50%; left: 3%; font-size: 3.5rem; animation-delay: -1s;">⭐</div>
+    <div class="hero-mascot" style="bottom: 30%; left: 15%; font-size: 4rem; animation-delay: -3s;">🎊</div>
+    <div class="hero-mascot hidden md:block" style="top: 70%; right: 5%; font-size: 5rem; animation-delay: -5s;">🦄</div>
+
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+            <!-- Left: Text Content -->
+            <div class="text-center lg:text-right">
+                <div class="hero-badge inline-flex items-center gap-2 bg-white/80 backdrop-blur px-5 py-2.5 rounded-full font-bold text-sm shadow-lg mb-6">
+                    <span class="relative flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+                    </span>
+                    <span class="text-gray-700">⭐ الأفضل في تنظيم حفلات الأطفال في مصر</span>
+                </div>
+
+                <h1 class="font-fredoka text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 text-balance">
+                    <span class="hero-title-line block">احتفال</span>
+                    <span class="hero-title-line block hero-title-gradient">ساحر</span>
+                    <span class="hero-title-line block">لا يُنسى! 🎉</span>
+                </h1>
+
+                <p class="hero-description text-lg md:text-xl text-gray-600 mb-8 max-w-xl lg:mr-0 mx-auto leading-relaxed">
+                    نحن نُحوّل أحلام أطفالك إلى ذكريات جميلة ومميزة!
+                    من حفلات أعياد الميلاد للسبوع، نوفر لك أفضل الشخصيات الكرتونية والتزيين والترفيه على أعلى مستوى.
+                </p>
+
+                <div class="flex flex-wrap gap-4 justify-center lg:justify-start mb-10">
+                    <a href="/booking" class="hero-cta btn-primary">
+                        <i class="fas fa-calendar-check"></i>
+                        احجز حفلتك الآن
+                    </a>
+                    <a href="/characters" class="hero-cta btn-secondary">
+                        <i class="fas fa-masks-theater"></i>
+                        شاهد الشخصيات
+                    </a>
+                </div>
+
+                <!-- Mini Stats -->
+                <div class="hero-stats-mini grid grid-cols-3 gap-4 max-w-md lg:mr-0 mx-auto">
+                    <div class="text-center lg:text-right">
+                        <div class="font-fredoka text-3xl md:text-4xl font-bold gradient-text-primary" data-counter data-target="500" data-suffix="+">0</div>
+                        <div class="text-sm text-gray-600 mt-1">حفلة ناجحة</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="font-fredoka text-3xl md:text-4xl font-bold gradient-text-primary" data-counter data-target="50" data-suffix="+">0</div>
+                        <div class="text-sm text-gray-600 mt-1">شخصية كرتونية</div>
+                    </div>
+                    <div class="text-center lg:text-right">
+                        <div class="font-fredoka text-3xl md:text-4xl font-bold gradient-text-primary" data-counter data-target="98" data-suffix="%">0</div>
+                        <div class="text-sm text-gray-600 mt-1">رضا العملاء</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Hero Image -->
+            <div class="relative">
+                <div class="hero-image-frame">
+                    <img src="https://sspark.genspark.ai/cfimages?u1=8FXMFguRlBdc1Sn8v7GkKflUwymxf%2FwaQeUOnJ5WNV2WZSG7QQOFZiKN6wdjq61J60op3cIyH7KI6Z%2FfvWz2m%2FMD5BCHh6Y8%2FloWE6SiAt4Ksz3LK98bNBJtfmbXl76vhkjb6WvjkLNpi6aOTGt938eD35w6C%2BEaIaF9N3ibuRZdwGUmfmuxC%2FWEeBbcjTlMLCh09cZgj8JK950%3D&u2=uzstogZG6kkohrPA&width=2560"
+                         alt="حفلة أطفال ساحرة"
+                         class="w-full h-auto block"
+                         loading="eager">
+                </div>
+
+                <!-- Floating mini-cards -->
+                <div class="absolute -top-6 -left-6 bg-white rounded-2xl shadow-2xl p-4 flex items-center gap-3 animate-float" style="animation-delay: -1s;">
+                    <div class="w-12 h-12 bg-gradient-to-br from-primary to-magic rounded-xl flex items-center justify-center text-white text-xl">
+                        ⭐
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-500">تقييم العملاء</div>
+                        <div class="font-bold text-gray-800">4.9 / 5.0</div>
+                    </div>
+                </div>
+
+                <div class="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-2xl p-4 flex items-center gap-3 animate-float" style="animation-delay: -3s;">
+                    <div class="w-12 h-12 bg-gradient-to-br from-secondary to-accent rounded-xl flex items-center justify-center text-2xl">
+                        🎊
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-500">حفلات هذا الشهر</div>
+                        <div class="font-bold text-gray-800">+45 حفلة</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="hidden md:flex flex-col items-center gap-2 mt-12 animate-bounce-slow">
+            <span class="text-gray-400 text-sm">اكتشف المزيد</span>
+            <i class="fas fa-chevron-down text-primary"></i>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== STATS SECTION ===================== -->
+<section class="py-16 relative">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="0">
+                <div class="stat-icon">🎉</div>
+                <div class="stat-number" data-counter data-target="{{ stats.parties_organized }}">0</div>
+                <div class="text-gray-600 mt-2 font-semibold">حفلة منظمة</div>
+            </div>
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="stat-icon">😊</div>
+                <div class="stat-number" data-counter data-target="{{ stats.happy_clients }}">0</div>
+                <div class="text-gray-600 mt-2 font-semibold">عميل سعيد</div>
+            </div>
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-icon">🎭</div>
+                <div class="stat-number" data-counter data-target="{{ stats.characters }}">0</div>
+                <div class="text-gray-600 mt-2 font-semibold">شخصية كرتونية</div>
+            </div>
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-icon">⏱️</div>
+                <div class="stat-number" data-counter data-target="{{ stats.years_experience }}">0</div>
+                <div class="text-gray-600 mt-2 font-semibold">سنوات خبرة</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== SERVICES SECTION ===================== -->
+<section class="py-20 relative">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-14" data-aos="fade-up">
+            <span class="section-badge">
+                <span>🎁</span>
+                <span>خدماتنا المميزة</span>
+            </span>
+            <h2 class="section-title">
+                باقات احتفالية <span class="gradient-text-primary">ساحرة</span>
+            </h2>
+            <p class="section-subtitle">
+                اختر الباقة التي تناسب احتياجاتك وميزانيتك، وسنحرص على تقديم تجربة لا تُنسى لطفلك وضيوفك.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {% for service in services %}
+            <div class="service-card {% if service.is_popular %}popular{% endif %} p-6 md:p-8" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 100 }}">
+                {% if service.is_popular %}
+                <div class="service-popular-badge">
+                    🔥 الأكثر طلباً
+                </div>
+                {% endif %}
+
+                <div class="text-5xl mb-4">{{ service.icon }}</div>
+                <h3 class="font-fredoka text-2xl font-bold mb-2 text-gray-800">{{ service.name_ar }}</h3>
+                <p class="text-gray-600 mb-4 min-h-[48px]">{{ service.short_desc or service.description[:80] + '...' }}</p>
+
+                <div class="flex items-baseline gap-2 mb-5">
+                    <span class="font-fredoka text-4xl font-bold gradient-text-primary">{{ "{:,.0f}".format(service.price) }}</span>
+                    <span class="text-gray-500 font-semibold">جنيه</span>
+                </div>
+
+                <ul class="space-y-2.5 mb-6 min-h-[180px]">
+                    {% for feature in service.features[:5] %}
+                    <li class="flex items-start gap-2 text-gray-700 text-sm">
+                        <i class="fas fa-check-circle text-secondary mt-1"></i>
+                        <span>{{ feature }}</span>
+                    </li>
+                    {% endfor %}
+                    {% if service.features|length > 5 %}
+                    <li class="text-primary text-sm font-semibold">
+                        + {{ service.features|length - 5 }} مميزات أخرى
+                    </li>
+                    {% endif %}
+                </ul>
+
+                <a href="/booking?service={{ service.id }}" class="block text-center w-full {% if service.is_popular %}bg-gradient-to-r from-primary to-magic text-white{% else %}bg-gray-100 text-gray-800 hover:bg-gradient-to-r hover:from-primary hover:to-magic hover:text-white{% endif %} font-bold py-3 rounded-full transition-all hover:shadow-lg">
+                    احجز الآن
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="text-center mt-10" data-aos="fade-up">
+            <a href="/services" class="btn-secondary">
+                شاهد كل الباقات
+                <i class="fas fa-arrow-left"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== CHARACTERS SECTION ===================== -->
+<section class="py-20 relative bg-gradient-to-br from-magic/5 via-cream to-secondary/5">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-14" data-aos="fade-up">
+            <span class="section-badge">
+                <span>🎭</span>
+                <span>شخصياتنا الكرتونية</span>
+            </span>
+            <h2 class="section-title">
+                أبطال طفلك <span class="gradient-text-primary">المفضّلون</span>
+            </h2>
+            <p class="section-subtitle">
+                مجموعة واسعة من الشخصيات الكرتونية الشهيرة جاهزة لإسعاد أطفالك وإحياء الحفل بالمرح والسعادة.
+            </p>
+        </div>
+
+        <!-- Characters Swiper -->
+        <div class="characters-swiper swiper" data-aos="fade-up">
+            <div class="swiper-wrapper pb-12">
+                {% for char in characters %}
+                <div class="swiper-slide">
+                    <div class="character-card">
+                        <div class="character-sparkle">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="character-image">
+                            <img src="{{ char.image_url }}" alt="{{ char.name_ar }}" loading="lazy">
+                        </div>
+                        <div class="character-info">
+                            <h3 class="font-fredoka text-2xl font-bold mb-1">{{ char.name_ar }}</h3>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="opacity-90">{{ char.name_en or '' }}</span>
+                                <span class="bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs font-bold">
+                                    {{ "{:,.0f}".format(char.price_per_hour) }} جنيه/ساعة
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+
+        <div class="text-center mt-10" data-aos="fade-up">
+            <a href="/characters" class="btn-primary">
+                <i class="fas fa-masks-theater"></i>
+                شاهد كل الشخصيات
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== HOW WE WORK SECTION ===================== -->
+<section class="py-20 relative">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-14" data-aos="fade-up">
+            <span class="section-badge">
+                <span>⚡</span>
+                <span>طريقة عملنا</span>
+            </span>
+            <h2 class="section-title">
+                كيف <span class="gradient-text-primary">نعمل؟</span>
+            </h2>
+            <p class="section-subtitle">
+                خطوات بسيطة وواضحة لتنظيم حفلتك المثالية في 4 مراحل سهلة فقط
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+            <div data-aos="fade-left" data-aos-delay="0">
+                <div class="timeline-item">
+                    <div class="timeline-icon" style="background: linear-gradient(135deg, #FF6B6B, #FFE66D);">
+                        <i class="fas fa-mouse-pointer"></i>
+                    </div>
+                    <h3 class="font-fredoka text-2xl font-bold mb-2">1. اختر باقتك</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        تصفّح باقاتنا المتنوعة واختر ما يناسب احتفالك وميزانيتك من الباقة الأساسية وحتى VIP الفاخرة.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon" style="background: linear-gradient(135deg, #4ECDC4, #A855F7);">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3 class="font-fredoka text-2xl font-bold mb-2">2. حدّد التاريخ والشخصيات</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        املأ نموذج الحجز بالتاريخ والمكان وعدد الأطفال، واختر الشخصيات الكرتونية المفضّلة لطفلك.
+                    </p>
+                </div>
+            </div>
+
+            <div data-aos="fade-right" data-aos-delay="100">
+                <div class="timeline-item">
+                    <div class="timeline-icon" style="background: linear-gradient(135deg, #A855F7, #FF6B6B);">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="font-fredoka text-2xl font-bold mb-2">3. تأكيد الحجز</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        فريقنا سيتواصل معك خلال ساعات لتأكيد التفاصيل ومناقشة أي طلبات إضافية لجعل حفلتك مثالية.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon" style="background: linear-gradient(135deg, #FFE66D, #FF6B6B);">
+                        <i class="fas fa-glass-cheers"></i>
+                    </div>
+                    <h3 class="font-fredoka text-2xl font-bold mb-2">4. استمتعوا بالحفلة!</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        نحن ننفّذ كل التفاصيل بدقة عالية، وأنتم تستمتعون بلحظات لا تُنسى مع أطفالكم وضيوفكم.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== GALLERY PREVIEW ===================== -->
+<section class="py-20 relative bg-gradient-to-br from-secondary/5 via-cream to-accent/10">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-14" data-aos="fade-up">
+            <span class="section-badge">
+                <span>📸</span>
+                <span>ذكرياتنا الجميلة</span>
+            </span>
+            <h2 class="section-title">
+                لحظات <span class="gradient-text-primary">سحرية</span>
+            </h2>
+            <p class="section-subtitle">
+                نظرة سريعة على بعض الحفلات الرائعة التي نظّمناها وأسعدنا فيها أطفالنا الأعزّاء.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+            {% for item in gallery_preview %}
+            <div class="gallery-item aspect-square {% if loop.index == 1 or loop.index == 6 %}md:row-span-2 md:aspect-auto{% endif %}"
+                 data-aos="zoom-in" data-aos-delay="{{ loop.index0 * 50 }}"
+                 data-category="{{ item.category }}">
+                <img src="{{ item.image_url }}" alt="{{ item.title or 'صورة من المعرض' }}" loading="lazy">
+                <div class="overlay">
+                    <div>
+                        <div class="font-bold text-white">{{ item.title }}</div>
+                        <div class="text-white/70 text-sm">{{ item.category }}</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="text-center mt-10" data-aos="fade-up">
+            <a href="/gallery" class="btn-secondary">
+                <i class="fas fa-images"></i>
+                شاهد كل الصور
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== TESTIMONIALS SECTION ===================== -->
+<section class="py-20 relative">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-14" data-aos="fade-up">
+            <span class="section-badge">
+                <span>💬</span>
+                <span>شهادات عملائنا</span>
+            </span>
+            <h2 class="section-title">
+                ماذا قال <span class="gradient-text-primary">عملاؤنا؟</span>
+            </h2>
+            <p class="section-subtitle">
+                آراء حقيقية من عائلات سعيدة استمتعت بخدماتنا وتجاربنا الفريدة.
+            </p>
+        </div>
+
+        <div class="testimonials-swiper swiper" data-aos="fade-up">
+            <div class="swiper-wrapper pb-12">
+                {% for t in testimonials %}
+                <div class="swiper-slide">
+                    <div class="testimonial-card h-full">
+                        <div class="testimonial-stars mb-3">
+                            {% for _ in range(t.rating) %}<i class="fas fa-star"></i>{% endfor %}
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6 min-h-[120px]">{{ t.content }}</p>
+                        <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                            {% if t.avatar_url %}
+                            <img src="{{ t.avatar_url }}" alt="{{ t.customer_name }}" class="w-12 h-12 rounded-full object-cover ring-2 ring-primary/20">
+                            {% else %}
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-magic flex items-center justify-center text-white font-bold">
+                                {{ t.customer_name[0] }}
+                            </div>
+                            {% endif %}
+                            <div>
+                                <div class="font-bold text-gray-800">{{ t.customer_name }}</div>
+                                <div class="text-sm text-gray-500">{{ t.customer_role or '' }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="swiper-pagination !bottom-0"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== CTA SECTION ===================== -->
+<section class="py-20 relative">
+    <div class="container mx-auto px-4">
+        <div class="relative overflow-hidden rounded-[40px] bg-gradient-to-br from-primary via-magic to-secondary p-10 md:p-16 text-white text-center" data-aos="zoom-in">
+            <!-- Decorative Pattern -->
+            <div class="absolute inset-0 opacity-20">
+                <div class="absolute top-10 left-10 text-6xl animate-float">🎈</div>
+                <div class="absolute top-10 right-10 text-7xl animate-float" style="animation-delay: -2s;">🎂</div>
+                <div class="absolute bottom-10 left-1/4 text-5xl animate-float" style="animation-delay: -3s;">🎁</div>
+                <div class="absolute bottom-10 right-1/4 text-6xl animate-float" style="animation-delay: -4s;">⭐</div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-9xl">🎉</div>
+            </div>
+
+            <div class="relative z-10">
+                <h2 class="font-fredoka text-3xl md:text-5xl font-bold mb-4">
+                    جاهزون لاحتفال <span class="text-accent">لا يُنسى؟</span>
+                </h2>
+                <p class="text-white/90 text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+                    احجز الآن واحصل على خصم 10% على أول حجز، وفريقنا جاهز للإجابة على كل استفساراتك.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="/booking" class="inline-flex items-center gap-3 bg-white text-primary px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-2xl">
+                        <i class="fas fa-calendar-check"></i>
+                        احجز حفلتك الآن
+                    </a>
+                    <a href="https://wa.me/{{ whatsapp }}" target="_blank" class="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-2xl">
+                        <i class="fab fa-whatsapp text-xl"></i>
+                        راسلنا على واتساب
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Characters Swiper
+    new Swiper('.characters-swiper', {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: true,
+        autoplay: { delay: 3500, disableOnInteraction: false },
+        pagination: { el: '.characters-swiper .swiper-pagination', clickable: true },
+        breakpoints: {
+            640: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+            1280: { slidesPerView: 4 },
+        }
+    });
+
+    // Testimonials Swiper
+    new Swiper('.testimonials-swiper', {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: true,
+        autoplay: { delay: 5000, disableOnInteraction: false },
+        pagination: { el: '.testimonials-swiper .swiper-pagination', clickable: true },
+        breakpoints: {
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+        }
+    });
+
+    // Trigger initial confetti when page loads (subtle)
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            if (typeof fireConfetti === 'function') {
+                fireConfetti({ particleCount: 50, spread: 60, origin: { y: 0.4 } });
+            }
+        }, 1500);
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+
+{% block title %}لوحة التحكم | بارتي ماجيك{% endblock %}
+
+{% block content %}
+
+<section class="py-12 min-h-screen">
+    <div class="container mx-auto px-4">
+        <!-- Header -->
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-8" data-aos="fade-down">
+            <div>
+                <h1 class="font-fredoka text-3xl md:text-4xl font-bold">
+                    <i class="fas fa-tachometer-alt text-primary"></i>
+                    لوحة التحكم
+                </h1>
+                <p class="text-gray-600 mt-1">مرحباً {{ user.full_name or user.username }} 👋</p>
+            </div>
+            <a href="/admin/logout" class="btn-secondary">
+                <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+            </a>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="admin-card text-center" data-aos="fade-up">
+                <div class="text-4xl mb-2">📋</div>
+                <div class="font-fredoka text-3xl font-bold gradient-text-primary">{{ stats.total_bookings }}</div>
+                <div class="text-gray-600 text-sm mt-1">إجمالي الحجوزات</div>
+            </div>
+            <div class="admin-card text-center" data-aos="fade-up" data-aos-delay="100">
+                <div class="text-4xl mb-2">⏳</div>
+                <div class="font-fredoka text-3xl font-bold text-yellow-600">{{ stats.pending_bookings }}</div>
+                <div class="text-gray-600 text-sm mt-1">حجوزات معلقة</div>
+            </div>
+            <div class="admin-card text-center" data-aos="fade-up" data-aos-delay="200">
+                <div class="text-4xl mb-2">✅</div>
+                <div class="font-fredoka text-3xl font-bold text-emerald-600">{{ stats.confirmed_bookings }}</div>
+                <div class="text-gray-600 text-sm mt-1">حجوزات مؤكدة</div>
+            </div>
+            <div class="admin-card text-center" data-aos="fade-up" data-aos-delay="300">
+                <div class="text-4xl mb-2">💰</div>
+                <div class="font-fredoka text-3xl font-bold gradient-text-primary">{{ "{:,}".format(stats.total_revenue) }}</div>
+                <div class="text-gray-600 text-sm mt-1">إجمالي الإيرادات (ج)</div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="flex gap-2 mb-6 border-b border-gray-200" data-aos="fade-up">
+            <button class="tab-btn active px-5 py-3 font-bold border-b-4 border-primary text-primary" data-tab="bookings">
+                <i class="fas fa-calendar-check"></i> الحجوزات ({{ stats.total_bookings }})
+            </button>
+            <button class="tab-btn px-5 py-3 font-bold border-b-4 border-transparent text-gray-600 hover:text-primary" data-tab="messages">
+                <i class="fas fa-envelope"></i> الرسائل ({{ stats.unread_messages }})
+            </button>
+        </div>
+
+        <!-- Bookings Tab -->
+        <div class="tab-content" id="tab-bookings" data-aos="fade-up">
+            <div class="admin-card overflow-hidden p-0">
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gradient-to-r from-primary/10 to-magic/10">
+                            <tr class="text-right">
+                                <th class="p-3 font-bold text-sm">رقم الحجز</th>
+                                <th class="p-3 font-bold text-sm">العميل</th>
+                                <th class="p-3 font-bold text-sm">الهاتف</th>
+                                <th class="p-3 font-bold text-sm">النوع</th>
+                                <th class="p-3 font-bold text-sm">التاريخ</th>
+                                <th class="p-3 font-bold text-sm">الأطفال</th>
+                                <th class="p-3 font-bold text-sm">السعر</th>
+                                <th class="p-3 font-bold text-sm">الحالة</th>
+                                <th class="p-3 font-bold text-sm">إجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            {% for b in bookings %}
+                            <tr class="hover:bg-gray-50 transition">
+                                <td class="p-3 font-mono text-sm">{{ b.booking_code }}</td>
+                                <td class="p-3 font-bold">{{ b.customer_name }}</td>
+                                <td class="p-3 text-sm" dir="ltr">{{ b.customer_phone }}</td>
+                                <td class="p-3 text-sm">
+                                    {% if b.event_type == 'birthday' %}🎂 ميلاد
+                                    {% elif b.event_type == 'sebou' %}👶 سبوع
+                                    {% else %}🎊 أخرى{% endif %}
+                                </td>
+                                <td class="p-3 text-sm">{{ b.event_date.strftime('%Y-%m-%d') }}</td>
+                                <td class="p-3 text-sm text-center">{{ b.kids_count }}</td>
+                                <td class="p-3 font-bold gradient-text-primary">{{ "{:,.0f}".format(b.total_price) }}</td>
+                                <td class="p-3">
+                                    <span class="status-badge status-{{ b.status }}">
+                                        {% if b.status == 'pending' %}⏳ معلق
+                                        {% elif b.status == 'confirmed' %}✅ مؤكد
+                                        {% elif b.status == 'completed' %}🎉 منجز
+                                        {% elif b.status == 'cancelled' %}❌ ملغي
+                                        {% endif %}
+                                    </span>
+                                </td>
+                                <td class="p-3">
+                                    <div class="flex gap-1">
+                                        <button onclick="updateStatus({{ b.id }}, 'confirmed')" class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 hover:bg-emerald-500 hover:text-white transition" title="تأكيد">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                        <button onclick="updateStatus({{ b.id }}, 'completed')" class="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 hover:bg-blue-500 hover:text-white transition" title="إنجاز">
+                                            <i class="fas fa-trophy"></i>
+                                        </button>
+                                        <button onclick="updateStatus({{ b.id }}, 'cancelled')" class="w-8 h-8 rounded-lg bg-red-100 text-red-700 hover:bg-red-500 hover:text-white transition" title="إلغاء">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                        <a href="https://wa.me/{{ b.customer_phone | replace(' ','') | replace('+','') }}" target="_blank" class="w-8 h-8 rounded-lg bg-green-100 text-green-700 hover:bg-green-500 hover:text-white transition flex items-center justify-center" title="واتساب">
+                                            <i class="fab fa-whatsapp"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr><td colspan="9" class="p-10 text-center text-gray-500">لا توجد حجوزات حالياً</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Messages Tab -->
+        <div class="tab-content hidden" id="tab-messages" data-aos="fade-up">
+            <div class="grid md:grid-cols-2 gap-4">
+                {% for m in messages %}
+                <div class="admin-card {% if not m.is_read %}border-r-4 border-primary{% endif %}">
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="font-bold">{{ m.name }}</h4>
+                        <span class="text-xs text-gray-500">{{ m.created_at.strftime('%Y-%m-%d %H:%M') }}</span>
+                    </div>
+                    <div class="text-sm text-gray-600 space-y-1 mb-3">
+                        {% if m.phone %}<div><i class="fas fa-phone text-xs"></i> <span dir="ltr">{{ m.phone }}</span></div>{% endif %}
+                        {% if m.email %}<div><i class="fas fa-envelope text-xs"></i> <span dir="ltr">{{ m.email }}</span></div>{% endif %}
+                        {% if m.subject %}<div><i class="fas fa-tag text-xs"></i> {{ m.subject }}</div>{% endif %}
+                    </div>
+                    <p class="text-gray-700 leading-relaxed border-t pt-3">{{ m.message }}</p>
+                </div>
+                {% else %}
+                <div class="col-span-2 text-center py-10 text-gray-500">لا توجد رسائل</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Tab switching
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const tab = btn.dataset.tab;
+        document.querySelectorAll('.tab-btn').forEach(b => {
+            b.classList.remove('active', 'border-primary', 'text-primary');
+            b.classList.add('border-transparent', 'text-gray-600');
+        });
+        btn.classList.add('active', 'border-primary', 'text-primary');
+        btn.classList.remove('border-transparent', 'text-gray-600');
+
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+        document.getElementById('tab-' + tab).classList.remove('hidden');
+    });
+});
+
+async function updateStatus(bookingId, status) {
+    if (!confirm('هل أنت متأكد من تغيير الحالة؟')) return;
+
+    const fd = new FormData();
+    fd.append('status_value', status);
+
+    try {
+        const res = await fetch(`/api/admin/bookings/${bookingId}/status`, {
+            method: 'POST',
+            body: fd,
+        });
+        if (!res.ok) throw new Error();
+        showToast('✅ تم تحديث الحالة', 'success');
+        if (status === 'confirmed') fireConfetti();
+        setTimeout(() => location.reload(), 800);
+    } catch (err) {
+        showToast('❌ خطأ في التحديث', 'error');
+    }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+
+{% block title %}الخدمات والباقات | بارتي ماجيك{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+<section class="relative pt-12 pb-20 overflow-hidden bg-gradient-to-br from-primary/10 via-magic/10 to-secondary/10">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-mascot" style="top: 15%; right: 8%;">🎁</div>
+    <div class="hero-mascot" style="bottom: 20%; left: 8%;">🎈</div>
+
+    <div class="container mx-auto px-4 relative z-10 text-center">
+        <span class="section-badge" data-aos="fade-down">
+            <span>🎁</span>
+            <span>خدماتنا الكاملة</span>
+        </span>
+        <h1 class="font-fredoka text-4xl md:text-6xl font-bold mb-4" data-aos="fade-up">
+            باقات احتفالية <span class="hero-title-gradient">لكل المناسبات</span>
+        </h1>
+        <p class="text-gray-600 text-lg max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+            من الباقات الاقتصادية حتى الفاخرة، لدينا الباقة المثالية لاحتفالك مهما كانت ميزانيتك.
+        </p>
+    </div>
+</section>
+
+<!-- Services Grid -->
+<section class="py-16 -mt-10">
+    <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {% for service in services %}
+            <div class="service-card {% if service.is_popular %}popular{% endif %}" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 80 }}">
+                <!-- Service Image -->
+                <div class="relative h-56 overflow-hidden rounded-t-3xl">
+                    <img src="{{ service.image_url }}" alt="{{ service.name_ar }}" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-midnight/70 to-transparent"></div>
+                    <div class="absolute bottom-4 right-4 text-5xl">{{ service.icon }}</div>
+                    {% if service.is_popular %}
+                    <div class="service-popular-badge">🔥 الأكثر طلباً</div>
+                    {% endif %}
+                </div>
+
+                <div class="p-6 md:p-8">
+                    <h3 class="font-fredoka text-2xl font-bold mb-2 text-gray-800">{{ service.name_ar }}</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">{{ service.description }}</p>
+
+                    <div class="flex items-baseline gap-2 mb-5 pb-5 border-b border-gray-100">
+                        <span class="font-fredoka text-4xl font-bold gradient-text-primary">{{ "{:,.0f}".format(service.price) }}</span>
+                        <span class="text-gray-500 font-semibold">جنيه</span>
+                        {% if service.duration_hours > 0 %}
+                        <span class="mr-auto text-gray-500 text-sm flex items-center gap-1">
+                            <i class="fas fa-clock"></i>
+                            {{ service.duration_hours|int }} ساعات
+                        </span>
+                        {% endif %}
+                    </div>
+
+                    <ul class="space-y-2.5 mb-6">
+                        {% for feature in service.features %}
+                        <li class="flex items-start gap-2 text-gray-700 text-sm">
+                            <i class="fas fa-check-circle text-secondary mt-1 flex-shrink-0"></i>
+                            <span>{{ feature }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+
+                    <a href="/booking?service={{ service.id }}" class="block text-center w-full {% if service.is_popular %}bg-gradient-to-r from-primary to-magic text-white{% else %}bg-gray-100 text-gray-800 hover:bg-gradient-to-r hover:from-primary hover:to-magic hover:text-white{% endif %} font-bold py-3 rounded-full transition-all hover:shadow-lg">
+                        احجز هذه الباقة
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Comparison Section -->
+<section class="py-16 bg-gradient-to-br from-cream to-secondary/5">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12" data-aos="fade-up">
+            <span class="section-badge"><span>📊</span><span>مقارنة الباقات</span></span>
+            <h2 class="section-title">قارن بين <span class="gradient-text-primary">الباقات</span></h2>
+        </div>
+
+        <div class="overflow-x-auto" data-aos="fade-up">
+            <table class="w-full bg-white rounded-3xl overflow-hidden shadow-lg">
+                <thead>
+                    <tr class="bg-gradient-to-r from-primary to-magic text-white">
+                        <th class="p-4 text-right font-fredoka text-lg">المميزات</th>
+                        <th class="p-4 text-center font-fredoka text-lg">الأساسية</th>
+                        <th class="p-4 text-center font-fredoka text-lg bg-accent text-midnight">المتقدمة 🔥</th>
+                        <th class="p-4 text-center font-fredoka text-lg">VIP 👑</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                    <tr class="hover:bg-gray-50">
+                        <td class="p-4 font-bold text-gray-700">عدد الشخصيات</td>
+                        <td class="p-4 text-center">1</td>
+                        <td class="p-4 text-center bg-accent/10 font-bold text-primary">2</td>
+                        <td class="p-4 text-center font-bold">3-4</td>
+                    </tr>
+                    <tr class="hover:bg-gray-50">
+                        <td class="p-4 font-bold text-gray-700">مدة الحفلة</td>
+                        <td class="p-4 text-center">2 ساعة</td>
+                        <td class="p-4 text-center bg-accent/10 font-bold text-primary">3 ساعات</td>
+                        <td class="p-4 text-center font-bold">4 ساعات</td>
+                    </tr>
+                    <tr class="hover:bg-gray-50">
+                        <td class="p-4 font-bold text-gray-700">عدد الأطفال</td>
+                        <td class="p-4 text-center">حتى 15</td>
+                        <td class="p-4 text-center bg-accent/10 font-bold text-primary">حتى 30</td>
+                        <td class="p-4 text-center font-bold">حتى 60</td>
+                    </tr>
+                    <tr class="hover:bg-gray-50">
+                        <td class="p-4 font-bold text-gray-700">التزيين</td>
+                        <td class="p-4 text-center">أساسي</td>
+                        <td class="p-4 text-center bg-accent/10 font-bold text-primary">شامل</td>
+                        <td class="p-4 text-center font-bold">فاخر</td>
+                    </tr>
+                    <tr class="hover:bg-gray-50">
+                        <td class="p-4 font-bold text-gray-700">DJ ومؤثرات صوتية</td>
+                        <td class="p-4 text-center text-gray-300"><i class="fas fa-times"></i></td>
+                        <td class="p-4 text-center bg-accent/10 text-secondary"><i class="fas fa-check text-xl"></i></td>
+                        <td class="p-4 text-center text-secondary"><i class="fas fa-check text-xl"></i></td>
+                    </tr>
+                    <tr class="hover:bg-gray-50">
+                        <td class="p-4 font-bold text-gray-700">رسم على الوجه</td>
+                        <td class="p-4 text-center text-gray-300"><i class="fas fa-times"></i></td>
+                        <td class="p-4 text-center bg-accent/10 text-secondary"><i class="fas fa-check text-xl"></i></td>
+                        <td class="p-4 text-center text-secondary"><i class="fas fa-check text-xl"></i></td>
+                    </tr>
+                    <tr class="hover:bg-gray-50">
+                        <td class="p-4 font-bold text-gray-700">التصوير الاحترافي</td>
+                        <td class="p-4 text-center text-gray-300"><i class="fas fa-times"></i></td>
+                        <td class="p-4 text-center bg-accent/10 text-secondary"><i class="fas fa-check text-xl"></i></td>
+                        <td class="p-4 text-center text-secondary"><i class="fas fa-check text-xl"></i> 4K</td>
+                    </tr>
+                    <tr class="hover:bg-gray-50">
+                        <td class="p-4 font-bold text-gray-700">عروض سحر وأكروبات</td>
+                        <td class="p-4 text-center text-gray-300"><i class="fas fa-times"></i></td>
+                        <td class="p-4 text-center bg-accent/10 text-gray-300"><i class="fas fa-times"></i></td>
+                        <td class="p-4 text-center text-secondary"><i class="fas fa-check text-xl"></i></td>
+                    </tr>
+                    <tr class="hover:bg-gray-50">
+                        <td class="p-4 font-bold text-gray-700">آلة فقاقيع + دخان</td>
+                        <td class="p-4 text-center text-gray-300"><i class="fas fa-times"></i></td>
+                        <td class="p-4 text-center bg-accent/10 text-gray-300"><i class="fas fa-times"></i></td>
+                        <td class="p-4 text-center text-secondary"><i class="fas fa-check text-xl"></i></td>
+                    </tr>
+                    <tr class="hover:bg-gray-50 font-bold">
+                        <td class="p-4 text-gray-700">السعر</td>
+                        <td class="p-4 text-center text-xl gradient-text-primary">1,500</td>
+                        <td class="p-4 text-center text-2xl bg-accent/10 gradient-text-primary">3,500</td>
+                        <td class="p-4 text-center text-xl gradient-text-primary">7,500</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Add-ons Section -->
+<section class="py-16">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12" data-aos="fade-up">
+            <span class="section-badge"><span>✨</span><span>إضافات اختيارية</span></span>
+            <h2 class="section-title">عزّز حفلتك <span class="gradient-text-primary">بإضافات مميزة</span></h2>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {% set extras = [
+                {'icon':'🎂','title':'كيكة فاخرة مخصصة','price':'500','desc':'كيكة بتصميم خاص بثيم الحفلة'},
+                {'icon':'📸','title':'تصوير فيديو 4K','price':'1,200','desc':'تصوير احترافي لكامل الحفلة'},
+                {'icon':'🎁','title':'هدايا تذكارية','price':'25','desc':'هدية لكل طفل (للقطعة)'},
+                {'icon':'🎨','title':'رسم على الوجه','price':'400','desc':'رسومات احترافية للأطفال'},
+                {'icon':'🎤','title':'DJ احترافي','price':'800','desc':'مع نظام صوت متطور'},
+                {'icon':'🍰','title':'بوفيه ضيافة','price':'30','desc':'للشخص الواحد'},
+                {'icon':'🎪','title':'مسرح كرنفال','price':'1,500','desc':'مع نطاطية وألعاب'},
+                {'icon':'💫','title':'ماكينة دخان وفقاقيع','price':'600','desc':'لمؤثرات بصرية مميزة'},
+            ] %}
+            {% for extra in extras %}
+            <div class="glass-card p-6 text-center" data-aos="zoom-in" data-aos-delay="{{ loop.index0 * 50 }}">
+                <div class="text-5xl mb-3">{{ extra.icon }}</div>
+                <h3 class="font-fredoka font-bold text-lg mb-2">{{ extra.title }}</h3>
+                <p class="text-gray-600 text-sm mb-3">{{ extra.desc }}</p>
+                <div class="font-fredoka text-2xl font-bold gradient-text-primary">{{ extra.price }} <span class="text-sm text-gray-500">جنيه</span></div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="py-16">
+    <div class="container mx-auto px-4 text-center">
+        <div class="glass-card p-10" data-aos="fade-up">
+            <h2 class="font-fredoka text-3xl md:text-4xl font-bold mb-4">
+                مش لاقي اللي يناسبك؟
+            </h2>
+            <p class="text-gray-600 mb-6 text-lg">
+                تواصل معنا الآن لتفصيل باقة مخصصة تماماً حسب احتياجاتك وميزانيتك.
+            </p>
+            <div class="flex flex-wrap justify-center gap-3">
+                <a href="/contact" class="btn-primary"><i class="fas fa-comments"></i> تواصل معنا</a>
+                <a href="https://wa.me/{{ whatsapp }}" target="_blank" class="btn-secondary">
+                    <i class="fab fa-whatsapp text-green-600"></i> واتساب
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

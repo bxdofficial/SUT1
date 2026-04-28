@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+
+{% block title %}تواصل معنا | بارتي ماجيك{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+<section class="relative pt-12 pb-12 overflow-hidden bg-gradient-to-br from-secondary/10 via-magic/10 to-primary/10">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-mascot" style="top: 15%; right: 10%; font-size: 4rem;">📞</div>
+    <div class="hero-mascot" style="bottom: 20%; left: 10%; font-size: 4rem;">💌</div>
+
+    <div class="container mx-auto px-4 relative z-10 text-center">
+        <span class="section-badge" data-aos="fade-down">
+            <span>📞</span>
+            <span>تواصل معنا</span>
+        </span>
+        <h1 class="font-fredoka text-4xl md:text-5xl font-bold mb-4" data-aos="fade-up">
+            دعنا <span class="hero-title-gradient">نسعد طفلك معاً</span>
+        </h1>
+        <p class="text-gray-600 max-w-xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+            نسعد بالتحدث معك! تواصل معنا عبر أي من الطرق التالية ونحن سنرد عليك في أقرب وقت.
+        </p>
+    </div>
+</section>
+
+<!-- Contact Cards -->
+<section class="py-12">
+    <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+            <a href="tel:{{ phone }}" class="glass-card p-6 text-center group" data-aos="fade-up" data-aos-delay="0">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-primary to-magic flex items-center justify-center text-white text-2xl group-hover:scale-110 transition-transform">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <h3 class="font-fredoka font-bold text-lg mb-1">اتصال هاتفي</h3>
+                <p class="text-gray-600 text-sm" dir="ltr">{{ phone }}</p>
+            </a>
+
+            <a href="https://wa.me/{{ whatsapp }}" target="_blank" class="glass-card p-6 text-center group" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center text-white text-3xl group-hover:scale-110 transition-transform">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <h3 class="font-fredoka font-bold text-lg mb-1">واتساب</h3>
+                <p class="text-gray-600 text-sm">رد سريع 24/7</p>
+            </a>
+
+            <a href="mailto:{{ email }}" class="glass-card p-6 text-center group" data-aos="fade-up" data-aos-delay="200">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-secondary to-accent flex items-center justify-center text-white text-2xl group-hover:scale-110 transition-transform">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3 class="font-fredoka font-bold text-lg mb-1">بريد إلكتروني</h3>
+                <p class="text-gray-600 text-sm" dir="ltr">{{ email }}</p>
+            </a>
+
+            <div class="glass-card p-6 text-center" data-aos="fade-up" data-aos-delay="300">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-accent to-primary flex items-center justify-center text-white text-2xl">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h3 class="font-fredoka font-bold text-lg mb-1">الموقع</h3>
+                <p class="text-gray-600 text-sm">{{ address }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Form + Map -->
+<section class="py-12">
+    <div class="container mx-auto px-4">
+        <div class="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            <!-- Form -->
+            <div class="glass-card p-6 md:p-8" data-aos="fade-left">
+                <h2 class="font-fredoka text-2xl md:text-3xl font-bold mb-2">أرسل لنا رسالة 💌</h2>
+                <p class="text-gray-600 mb-6">سنعود إليك خلال ساعات قليلة</p>
+
+                <form id="contact-form" class="space-y-4">
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="input-label">الاسم</label>
+                            <input type="text" name="name" placeholder="اسمك الكريم" class="input-field" required>
+                        </div>
+                        <div>
+                            <label class="input-label">رقم الهاتف</label>
+                            <input type="tel" name="phone" placeholder="01XXXXXXXXX" class="input-field">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="input-label">البريد الإلكتروني</label>
+                        <input type="email" name="email" placeholder="email@example.com" class="input-field">
+                    </div>
+                    <div>
+                        <label class="input-label">الموضوع</label>
+                        <input type="text" name="subject" placeholder="موضوع الرسالة" class="input-field">
+                    </div>
+                    <div>
+                        <label class="input-label">الرسالة</label>
+                        <textarea name="message" rows="5" placeholder="اكتب رسالتك هنا..." class="input-field" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary w-full justify-center">
+                        <i class="fas fa-paper-plane"></i>
+                        إرسال الرسالة
+                    </button>
+                </form>
+            </div>
+
+            <!-- Map / Info -->
+            <div data-aos="fade-right">
+                <div class="glass-card p-0 overflow-hidden h-80 mb-6">
+                    <iframe
+                        src="https://www.openstreetmap.org/export/embed.html?bbox=31.2%2C30.0%2C31.3%2C30.1&layer=mapnik"
+                        class="w-full h-full"
+                        title="موقعنا على الخريطة"
+                        loading="lazy">
+                    </iframe>
+                </div>
+
+                <div class="glass-card p-6">
+                    <h3 class="font-fredoka text-xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fas fa-clock text-primary"></i> ساعات العمل
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center pb-2 border-b border-gray-100">
+                            <span class="text-gray-700">السبت - الخميس</span>
+                            <span class="font-bold text-secondary">10 ص - 10 م</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-2 border-b border-gray-100">
+                            <span class="text-gray-700">الجمعة</span>
+                            <span class="font-bold text-secondary">2 م - 10 م</span>
+                        </div>
+                        <div class="flex justify-between items-center text-green-600 font-bold">
+                            <span><i class="fab fa-whatsapp"></i> واتساب</span>
+                            <span>متاح 24/7</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 grid grid-cols-4 gap-3">
+                    <a href="#" class="aspect-square flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-2xl text-xl hover:scale-110 transition-transform shadow-lg">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="aspect-square flex items-center justify-center bg-gradient-to-br from-pink-500 via-red-500 to-yellow-500 text-white rounded-2xl text-xl hover:scale-110 transition-transform shadow-lg">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="aspect-square flex items-center justify-center bg-gradient-to-br from-black to-gray-700 text-white rounded-2xl text-xl hover:scale-110 transition-transform shadow-lg">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="#" class="aspect-square flex items-center justify-center bg-gradient-to-br from-red-500 to-red-700 text-white rounded-2xl text-xl hover:scale-110 transition-transform shadow-lg">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="py-16 bg-gradient-to-br from-cream to-accent/10">
+    <div class="container mx-auto px-4 max-w-3xl">
+        <div class="text-center mb-10" data-aos="fade-up">
+            <span class="section-badge"><span>❓</span><span>الأسئلة الشائعة</span></span>
+            <h2 class="section-title">إجابات لأكثر الأسئلة <span class="gradient-text-primary">شيوعاً</span></h2>
+        </div>
+
+        {% set faqs = [
+            {'q':'كم من الوقت قبل الحفلة يجب أن أحجز؟','a':'ننصح بالحجز قبل أسبوع إلى أسبوعين على الأقل لضمان توفر الشخصيات والباقة المطلوبة، خاصة في عطلات الأسبوع والمواسم.'},
+            {'q':'ما هي طرق الدفع المتاحة؟','a':'نقبل الدفع نقداً أو عبر فودافون كاش، إنستاباي، أو التحويل البنكي. نطلب عربون 30% لتأكيد الحجز والباقي يوم الحفلة.'},
+            {'q':'هل يمكنني تخصيص الباقة؟','a':'بالتأكيد! يمكنك إضافة أو حذف أي خدمة من الباقة. تواصل معنا لتفصيل باقة مخصصة تماماً حسب احتياجاتك.'},
+            {'q':'في أي مدن تقدمون الخدمة؟','a':'نخدم القاهرة الكبرى (القاهرة، الجيزة، 6 أكتوبر، الشيخ زايد، التجمعات). للمدن الأخرى تواصل معنا لمعرفة الإمكانية والتكلفة الإضافية.'},
+            {'q':'ماذا يحدث في حالة الإلغاء؟','a':'يمكن إلغاء الحجز قبل الحفلة بأسبوع لاسترداد العربون كاملاً. الإلغاء قبل 3 أيام يستوجب خصم 50%، وبعدها لا يُسترد العربون.'},
+            {'q':'هل توفرون عروض للحفلات الكبيرة؟','a':'نعم، لدينا عروض خاصة للحفلات التي يحضرها أكثر من 50 طفل. تواصل معنا للحصول على عرض سعر مخصص.'},
+        ] %}
+        <div class="space-y-3">
+            {% for faq in faqs %}
+            <details class="glass-card p-5 group cursor-pointer" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 50 }}">
+                <summary class="flex items-center justify-between font-bold text-gray-800 list-none">
+                    <span class="flex items-center gap-3">
+                        <span class="w-8 h-8 bg-primary/10 text-primary rounded-full flex items-center justify-center text-sm">{{ loop.index }}</span>
+                        {{ faq.q }}
+                    </span>
+                    <i class="fas fa-chevron-down transition-transform group-open:rotate-180 text-primary"></i>
+                </summary>
+                <p class="text-gray-600 mt-4 pr-11 leading-relaxed">{{ faq.a }}</p>
+            </details>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

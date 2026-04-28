@@ -1,0 +1,531 @@
+{% extends "base.html" %}
+
+{% block title %}احجز حفلتك | بارتي ماجيك{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+<section class="relative pt-12 pb-12 overflow-hidden bg-gradient-to-br from-primary/10 via-magic/10 to-secondary/10">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-mascot" style="top: 15%; right: 10%; font-size: 4rem;">🎈</div>
+    <div class="hero-mascot" style="bottom: 15%; left: 10%; font-size: 4.5rem;">🎂</div>
+
+    <div class="container mx-auto px-4 relative z-10 text-center">
+        <span class="section-badge" data-aos="fade-down">
+            <span>📅</span>
+            <span>احجز حفلتك بسهولة</span>
+        </span>
+        <h1 class="font-fredoka text-4xl md:text-5xl font-bold mb-4" data-aos="fade-up">
+            احجز <span class="hero-title-gradient">حفلتك الآن</span>
+        </h1>
+        <p class="text-gray-600 max-w-xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+            خطوات بسيطة لتنظيم حفلة لا تُنسى. املأ النموذج وسنتواصل معك خلال ساعات.
+        </p>
+    </div>
+</section>
+
+<!-- Booking Wizard -->
+<section class="py-12">
+    <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+
+            <!-- Progress Steps -->
+            <div class="wizard-progress mb-16" id="wizard-progress">
+                <div class="flex flex-col items-center">
+                    <div class="wizard-progress-step active" data-step="1">1</div>
+                    <div class="wizard-step-label">نوع الحفلة</div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="wizard-progress-step" data-step="2">2</div>
+                    <div class="wizard-step-label">التفاصيل</div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="wizard-progress-step" data-step="3">3</div>
+                    <div class="wizard-step-label">الباقة</div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="wizard-progress-step" data-step="4">4</div>
+                    <div class="wizard-step-label">الشخصيات</div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="wizard-progress-step" data-step="5">5</div>
+                    <div class="wizard-step-label">بياناتك</div>
+                </div>
+            </div>
+
+            <form id="booking-form" class="glass-card p-6 md:p-10">
+
+                <!-- Step 1: Event Type -->
+                <div class="wizard-step active" data-step="1">
+                    <h2 class="font-fredoka text-2xl md:text-3xl font-bold mb-6 text-center">ما نوع الحفلة؟ 🎉</h2>
+                    <div class="grid sm:grid-cols-3 gap-4">
+                        <label class="choice-card" data-choice="event_type" data-value="birthday">
+                            <input type="radio" name="event_type" value="birthday" class="hidden" required>
+                            <div class="text-6xl mb-3">🎂</div>
+                            <div class="font-fredoka text-xl font-bold mb-1">عيد ميلاد</div>
+                            <p class="text-sm text-gray-600">احتفال بعيد ميلاد طفلك</p>
+                        </label>
+                        <label class="choice-card" data-choice="event_type" data-value="sebou">
+                            <input type="radio" name="event_type" value="sebou" class="hidden">
+                            <div class="text-6xl mb-3">👶</div>
+                            <div class="font-fredoka text-xl font-bold mb-1">سبوع</div>
+                            <p class="text-sm text-gray-600">احتفال السبوع التقليدي</p>
+                        </label>
+                        <label class="choice-card" data-choice="event_type" data-value="other">
+                            <input type="radio" name="event_type" value="other" class="hidden">
+                            <div class="text-6xl mb-3">🎊</div>
+                            <div class="font-fredoka text-xl font-bold mb-1">مناسبة أخرى</div>
+                            <p class="text-sm text-gray-600">تخرج، تخفيف، أو أي مناسبة</p>
+                        </label>
+                    </div>
+
+                    <div class="flex justify-end mt-8">
+                        <button type="button" class="btn-primary" onclick="nextStep()">
+                            التالي <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Event Details -->
+                <div class="wizard-step" data-step="2">
+                    <h2 class="font-fredoka text-2xl md:text-3xl font-bold mb-6 text-center">تفاصيل الحفلة 📍</h2>
+                    <div class="grid md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="input-label">📅 تاريخ الحفلة</label>
+                            <input type="date" name="event_date" class="input-field" required>
+                        </div>
+                        <div>
+                            <label class="input-label">⏰ وقت الحفلة</label>
+                            <input type="time" name="event_time" class="input-field">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="input-label">📍 عنوان الحفلة</label>
+                            <input type="text" name="location" placeholder="ادخل العنوان كاملاً" class="input-field" required>
+                        </div>
+                        <div>
+                            <label class="input-label">🏙️ المدينة</label>
+                            <select name="city" class="input-field" required>
+                                <option value="القاهرة">القاهرة</option>
+                                <option value="الجيزة">الجيزة</option>
+                                <option value="الإسكندرية">الإسكندرية</option>
+                                <option value="6 أكتوبر">6 أكتوبر</option>
+                                <option value="الشيخ زايد">الشيخ زايد</option>
+                                <option value="التجمع الخامس">التجمع الخامس</option>
+                                <option value="المعادي">المعادي</option>
+                                <option value="مدينة نصر">مدينة نصر</option>
+                                <option value="أخرى">أخرى</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="input-label">👶 عدد الأطفال</label>
+                            <input type="number" name="kids_count" min="1" max="500" value="15" class="input-field" required>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="input-label">🎈 الفئة العمرية</label>
+                            <select name="age_group" class="input-field">
+                                <option value="">اختر الفئة العمرية</option>
+                                <option value="0-2">0 - 2 سنوات</option>
+                                <option value="3-5">3 - 5 سنوات</option>
+                                <option value="6-9">6 - 9 سنوات</option>
+                                <option value="10-13">10 - 13 سنة</option>
+                                <option value="mixed">أعمار مختلطة</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between mt-8 gap-3">
+                        <button type="button" class="btn-secondary" onclick="prevStep()">
+                            <i class="fas fa-arrow-right"></i> السابق
+                        </button>
+                        <button type="button" class="btn-primary" onclick="nextStep()">
+                            التالي <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Service Package -->
+                <div class="wizard-step" data-step="3">
+                    <h2 class="font-fredoka text-2xl md:text-3xl font-bold mb-6 text-center">اختر باقتك 🎁</h2>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {% for service in services %}
+                        <label class="choice-card service-choice {% if service.is_popular %}border-accent shadow-lg{% endif %} relative" data-choice="service_id" data-value="{{ service.id }}" data-price="{{ service.price }}">
+                            <input type="radio" name="service_id" value="{{ service.id }}" class="hidden">
+                            {% if service.is_popular %}
+                            <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-midnight px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap">🔥 الأكثر طلباً</div>
+                            {% endif %}
+                            <div class="text-4xl mb-2">{{ service.icon }}</div>
+                            <div class="font-fredoka text-lg font-bold mb-1">{{ service.name_ar }}</div>
+                            <p class="text-xs text-gray-600 mb-3 min-h-[36px]">{{ service.short_desc or '' }}</p>
+                            <div class="font-fredoka text-2xl font-bold gradient-text-primary">
+                                {{ "{:,.0f}".format(service.price) }} <span class="text-xs text-gray-500">جنيه</span>
+                            </div>
+                        </label>
+                        {% endfor %}
+                    </div>
+
+                    <div class="flex justify-between mt-8 gap-3">
+                        <button type="button" class="btn-secondary" onclick="prevStep()">
+                            <i class="fas fa-arrow-right"></i> السابق
+                        </button>
+                        <button type="button" class="btn-primary" onclick="nextStep()">
+                            التالي <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Characters -->
+                <div class="wizard-step" data-step="4">
+                    <h2 class="font-fredoka text-2xl md:text-3xl font-bold mb-3 text-center">اختر الشخصيات 🎭</h2>
+                    <p class="text-center text-gray-600 mb-6">اختر شخصية أو أكثر (اختياري - الباقة تتضمن شخصيات أساسية)</p>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 max-h-[500px] overflow-y-auto p-2">
+                        {% for char in characters %}
+                        <label class="choice-card character-choice p-3 cursor-pointer relative" data-id="{{ char.id }}" data-price="{{ char.price_per_hour }}">
+                            <input type="checkbox" name="characters" value="{{ char.id }}" class="hidden">
+                            <div class="aspect-square overflow-hidden rounded-xl mb-2">
+                                <img src="{{ char.image_url }}" alt="{{ char.name_ar }}" class="w-full h-full object-cover" loading="lazy">
+                            </div>
+                            <div class="font-bold text-sm text-center">{{ char.name_ar }}</div>
+                            <div class="text-xs text-center text-primary font-semibold mt-1">{{ "{:,.0f}".format(char.price_per_hour) }} جنيه/ساعة</div>
+                            <div class="check-mark absolute top-2 left-2 w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center opacity-0 transition-opacity">
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </label>
+                        {% endfor %}
+                    </div>
+
+                    <div class="flex justify-between mt-8 gap-3">
+                        <button type="button" class="btn-secondary" onclick="prevStep()">
+                            <i class="fas fa-arrow-right"></i> السابق
+                        </button>
+                        <button type="button" class="btn-primary" onclick="nextStep()">
+                            التالي <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 5: Customer Info -->
+                <div class="wizard-step" data-step="5">
+                    <h2 class="font-fredoka text-2xl md:text-3xl font-bold mb-6 text-center">بياناتك للتواصل 📞</h2>
+
+                    <div class="grid md:grid-cols-2 gap-5 mb-6">
+                        <div class="md:col-span-2">
+                            <label class="input-label">👤 الاسم الكامل</label>
+                            <input type="text" name="customer_name" placeholder="مثال: أحمد محمد" class="input-field" required>
+                        </div>
+                        <div>
+                            <label class="input-label">📱 رقم الهاتف</label>
+                            <input type="tel" name="customer_phone" placeholder="01XXXXXXXXX" class="input-field" required pattern="[0-9+\-\s]{10,15}">
+                        </div>
+                        <div>
+                            <label class="input-label">📧 البريد الإلكتروني (اختياري)</label>
+                            <input type="email" name="customer_email" placeholder="email@example.com" class="input-field">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="input-label">📝 ملاحظات إضافية</label>
+                            <textarea name="notes" rows="3" placeholder="أي طلبات خاصة، ثيم معين، طعام مخصص..." class="input-field"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Price Summary -->
+                    <div class="bg-gradient-to-br from-primary/5 to-magic/5 rounded-2xl p-5 border border-primary/20 mb-6">
+                        <h3 class="font-fredoka text-xl font-bold mb-4 flex items-center gap-2">
+                            <i class="fas fa-receipt text-primary"></i> ملخص الحجز
+                        </h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between"><span>نوع الحفلة:</span> <strong id="summary-event-type">-</strong></div>
+                            <div class="flex justify-between"><span>التاريخ:</span> <strong id="summary-date">-</strong></div>
+                            <div class="flex justify-between"><span>عدد الأطفال:</span> <strong id="summary-kids">-</strong></div>
+                            <div class="flex justify-between"><span>الباقة:</span> <strong id="summary-service">-</strong></div>
+                            <div class="flex justify-between"><span>الشخصيات:</span> <strong id="summary-chars">لا يوجد</strong></div>
+                            <div class="border-t border-primary/20 pt-3 flex justify-between items-baseline">
+                                <span class="font-bold text-base">السعر الإجمالي:</span>
+                                <span class="font-fredoka text-3xl font-bold gradient-text-primary"><span id="summary-total">0</span> جنيه</span>
+                            </div>
+                            <div class="text-xs text-gray-500 text-center pt-2">
+                                💡 العربون 30% = <span id="summary-deposit">0</span> جنيه (يُدفع لتأكيد الحجز)
+                            </div>
+                        </div>
+                    </div>
+
+                    <label class="flex items-start gap-3 mb-6 cursor-pointer">
+                        <input type="checkbox" required class="mt-1 w-5 h-5 accent-primary">
+                        <span class="text-sm text-gray-700">
+                            أوافق على <a href="#" class="text-primary font-bold hover:underline">شروط الخدمة</a> وأؤكد صحة البيانات المُدخلة.
+                        </span>
+                    </label>
+
+                    <div class="flex justify-between gap-3">
+                        <button type="button" class="btn-secondary" onclick="prevStep()">
+                            <i class="fas fa-arrow-right"></i> السابق
+                        </button>
+                        <button type="submit" class="btn-primary" id="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            تأكيد الحجز
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Success Message (hidden by default) -->
+            <div id="booking-success" class="glass-card p-10 text-center hidden">
+                <div class="text-7xl mb-4 animate-bounce">🎉</div>
+                <h2 class="font-fredoka text-3xl md:text-4xl font-bold mb-3 gradient-text-primary">تم الحجز بنجاح!</h2>
+                <p class="text-gray-600 text-lg mb-6">شكراً لاختيارك بارتي ماجيك! سنتواصل معك خلال ساعات لتأكيد التفاصيل.</p>
+                <div class="bg-cream rounded-2xl p-5 mb-6 inline-block">
+                    <div class="text-sm text-gray-600 mb-1">رقم الحجز الخاص بك:</div>
+                    <div id="booking-code" class="font-fredoka text-2xl font-bold text-primary">PRTY-XXXXXX</div>
+                </div>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <a href="/" class="btn-primary"><i class="fas fa-home"></i> الصفحة الرئيسية</a>
+                    <a href="https://wa.me/{{ whatsapp }}" target="_blank" class="btn-secondary">
+                        <i class="fab fa-whatsapp text-green-600"></i> واتساب
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+let currentStep = 1;
+const totalSteps = 5;
+let bookingData = {
+    event_type: '',
+    event_date: '',
+    event_time: '',
+    location: '',
+    city: 'القاهرة',
+    kids_count: 15,
+    age_group: '',
+    service_id: null,
+    characters_ids: [],
+    notes: '',
+    customer_name: '',
+    customer_phone: '',
+    customer_email: '',
+    total_price: 0,
+};
+
+// Set min date = today
+document.querySelector('input[name="event_date"]').min = new Date().toISOString().split('T')[0];
+
+// Pre-select service from URL ?service=ID
+const urlParams = new URLSearchParams(window.location.search);
+const preSelectedService = urlParams.get('service');
+const preSelectedCharacter = urlParams.get('character');
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (preSelectedService) {
+        const card = document.querySelector(`.service-choice[data-value="${preSelectedService}"]`);
+        if (card) selectChoice(card);
+    }
+    if (preSelectedCharacter) {
+        const card = document.querySelector(`.character-choice[data-id="${preSelectedCharacter}"]`);
+        if (card) toggleCharacter(card);
+    }
+});
+
+// Single choice cards (event type, service)
+document.querySelectorAll('.choice-card[data-choice]').forEach(card => {
+    card.addEventListener('click', (e) => {
+        if (card.classList.contains('character-choice')) return;
+        e.preventDefault();
+        selectChoice(card);
+    });
+});
+
+function selectChoice(card) {
+    const choice = card.dataset.choice;
+    const value = card.dataset.value;
+    // Deselect siblings with same data-choice
+    document.querySelectorAll(`.choice-card[data-choice="${choice}"]`).forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    // Update radio
+    const radio = card.querySelector('input[type="radio"]');
+    if (radio) radio.checked = true;
+    bookingData[choice] = choice === 'service_id' ? parseInt(value) : value;
+    if (choice === 'service_id') {
+        bookingData.servicePrice = parseFloat(card.dataset.price);
+        updatePrice();
+    }
+}
+
+// Multi-select characters
+document.querySelectorAll('.character-choice').forEach(card => {
+    card.addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleCharacter(card);
+    });
+});
+
+function toggleCharacter(card) {
+    const id = parseInt(card.dataset.id);
+    const checkbox = card.querySelector('input[type="checkbox"]');
+    const checkmark = card.querySelector('.check-mark');
+
+    if (card.classList.contains('selected')) {
+        card.classList.remove('selected');
+        checkbox.checked = false;
+        checkmark.style.opacity = '0';
+        bookingData.characters_ids = bookingData.characters_ids.filter(x => x !== id);
+    } else {
+        card.classList.add('selected');
+        checkbox.checked = true;
+        checkmark.style.opacity = '1';
+        bookingData.characters_ids.push(id);
+    }
+    updatePrice();
+}
+
+function updatePrice() {
+    let total = bookingData.servicePrice || 0;
+    document.querySelectorAll('.character-choice.selected').forEach(card => {
+        total += parseFloat(card.dataset.price) * 2; // ساعتين افتراضي
+    });
+    bookingData.total_price = total;
+    document.getElementById('summary-total').textContent = total.toLocaleString('ar-EG');
+    document.getElementById('summary-deposit').textContent = Math.round(total * 0.3).toLocaleString('ar-EG');
+}
+
+function nextStep() {
+    if (!validateStep(currentStep)) return;
+    if (currentStep < totalSteps) {
+        currentStep++;
+        updateWizard();
+    }
+}
+
+function prevStep() {
+    if (currentStep > 1) {
+        currentStep--;
+        updateWizard();
+    }
+}
+
+function validateStep(step) {
+    if (step === 1 && !bookingData.event_type) {
+        showToast('⚠️ من فضلك اختر نوع الحفلة', 'error');
+        return false;
+    }
+    if (step === 2) {
+        const date = document.querySelector('[name="event_date"]').value;
+        const loc = document.querySelector('[name="location"]').value;
+        const kids = document.querySelector('[name="kids_count"]').value;
+        if (!date || !loc || !kids) {
+            showToast('⚠️ من فضلك املأ كل الحقول المطلوبة', 'error');
+            return false;
+        }
+        bookingData.event_date = date;
+        bookingData.event_time = document.querySelector('[name="event_time"]').value;
+        bookingData.location = loc;
+        bookingData.city = document.querySelector('[name="city"]').value;
+        bookingData.kids_count = parseInt(kids);
+        bookingData.age_group = document.querySelector('[name="age_group"]').value;
+    }
+    if (step === 3 && !bookingData.service_id) {
+        showToast('⚠️ من فضلك اختر باقة', 'error');
+        return false;
+    }
+    return true;
+}
+
+function updateWizard() {
+    document.querySelectorAll('.wizard-step').forEach(s => s.classList.remove('active'));
+    document.querySelector(`.wizard-step[data-step="${currentStep}"]`).classList.add('active');
+
+    document.querySelectorAll('.wizard-progress-step').forEach((s, i) => {
+        s.classList.remove('active', 'completed');
+        const stepNum = i + 1;
+        if (stepNum < currentStep) s.classList.add('completed');
+        else if (stepNum === currentStep) s.classList.add('active');
+    });
+
+    // Progress bar fill (RTL: bar grows from right to left)
+    const progressPct = ((currentStep - 1) / (totalSteps - 1)) * 100;
+    document.querySelector('.wizard-progress').style.setProperty('--progress-width', `${progressPct}%`);
+
+    // Update summary on last step
+    if (currentStep === totalSteps) updateSummary();
+
+    // Scroll to top of form
+    document.getElementById('booking-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function updateSummary() {
+    const eventTypes = { birthday: '🎂 عيد ميلاد', sebou: '👶 سبوع', other: '🎊 مناسبة أخرى' };
+    document.getElementById('summary-event-type').textContent = eventTypes[bookingData.event_type] || '-';
+    document.getElementById('summary-date').textContent = bookingData.event_date || '-';
+    document.getElementById('summary-kids').textContent = bookingData.kids_count + ' طفل';
+
+    const selectedService = document.querySelector('.service-choice.selected');
+    document.getElementById('summary-service').textContent = selectedService
+        ? selectedService.querySelector('.font-fredoka').textContent
+        : '-';
+
+    const selectedChars = document.querySelectorAll('.character-choice.selected');
+    document.getElementById('summary-chars').textContent = selectedChars.length > 0
+        ? Array.from(selectedChars).map(c => c.querySelector('.font-bold').textContent).join('، ')
+        : 'بدون شخصيات إضافية';
+}
+
+// Form submission
+document.getElementById('booking-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    const originalText = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+
+    bookingData.customer_name = document.querySelector('[name="customer_name"]').value;
+    bookingData.customer_phone = document.querySelector('[name="customer_phone"]').value;
+    bookingData.customer_email = document.querySelector('[name="customer_email"]').value;
+    bookingData.notes = document.querySelector('[name="notes"]').value;
+
+    try {
+        const res = await fetch('/api/bookings', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                customer_name: bookingData.customer_name,
+                customer_phone: bookingData.customer_phone,
+                customer_email: bookingData.customer_email || null,
+                event_type: bookingData.event_type,
+                event_date: bookingData.event_date,
+                event_time: bookingData.event_time || null,
+                location: bookingData.location,
+                city: bookingData.city,
+                kids_count: bookingData.kids_count,
+                age_group: bookingData.age_group || null,
+                service_id: bookingData.service_id,
+                characters_ids: bookingData.characters_ids,
+                notes: bookingData.notes || null,
+                total_price: bookingData.total_price,
+            }),
+        });
+
+        if (!res.ok) {
+            const err = await res.json().catch(() => ({}));
+            throw new Error(err.detail || 'فشل الإرسال');
+        }
+
+        const data = await res.json();
+        // Show success
+        document.getElementById('booking-form').classList.add('hidden');
+        document.getElementById('wizard-progress').classList.add('hidden');
+        document.getElementById('booking-success').classList.remove('hidden');
+        document.getElementById('booking-code').textContent = data.booking_code;
+        celebrationConfetti();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    } catch (err) {
+        showToast('❌ ' + (err.message || 'حدث خطأ، حاول مرة أخرى'), 'error');
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+    }
+});
+</script>
+{% endblock %}

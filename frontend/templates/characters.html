@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block title %}الشخصيات والماسكات | بارتي ماجيك{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+<section class="relative pt-12 pb-20 overflow-hidden bg-gradient-to-br from-magic/10 via-primary/10 to-accent/10">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-mascot" style="top: 10%; right: 8%; font-size: 5rem;">🎭</div>
+    <div class="hero-mascot" style="top: 25%; left: 10%; font-size: 4rem;">🦄</div>
+    <div class="hero-mascot" style="bottom: 15%; right: 15%; font-size: 4.5rem;">⭐</div>
+
+    <div class="container mx-auto px-4 relative z-10 text-center">
+        <span class="section-badge" data-aos="fade-down">
+            <span>🎭</span>
+            <span>شخصياتنا الكرتونية</span>
+        </span>
+        <h1 class="font-fredoka text-4xl md:text-6xl font-bold mb-4" data-aos="fade-up">
+            تعرّف على <span class="hero-title-gradient">أبطالك المفضلين</span>
+        </h1>
+        <p class="text-gray-600 text-lg max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+            مجموعة مميزة من الشخصيات الكرتونية المحبوبة، جاهزة لإحياء حفلتك وإسعاد الأطفال.
+        </p>
+    </div>
+</section>
+
+<!-- Filter Buttons -->
+<section class="py-6 sticky top-20 z-30 bg-cream/80 backdrop-blur">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-wrap justify-center gap-2 md:gap-3">
+            <button class="char-filter-btn gallery-filter-btn active" data-filter="all">
+                <i class="fas fa-th-large"></i> الكل
+            </button>
+            <button class="char-filter-btn gallery-filter-btn" data-filter="cartoon">
+                <span class="text-lg">🎨</span> كرتون
+            </button>
+            <button class="char-filter-btn gallery-filter-btn" data-filter="princess">
+                <span class="text-lg">👑</span> أميرات
+            </button>
+            <button class="char-filter-btn gallery-filter-btn" data-filter="superhero">
+                <span class="text-lg">🦸</span> أبطال خارقون
+            </button>
+            <button class="char-filter-btn gallery-filter-btn" data-filter="animal">
+                <span class="text-lg">🐻</span> حيوانات
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Characters Grid -->
+<section class="py-16">
+    <div class="container mx-auto px-4">
+        <div id="characters-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            {% for char in characters %}
+            <div class="char-item character-card" data-category="{{ char.category }}" data-aos="zoom-in" data-aos-delay="{{ (loop.index0 % 8) * 60 }}" style="--char-color: {{ char.color_theme }}">
+                <div class="character-sparkle" style="background: {{ char.color_theme }}33;">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="character-image">
+                    <img src="{{ char.image_url }}" alt="{{ char.name_ar }}" loading="lazy">
+                </div>
+                <div class="character-info">
+                    <h3 class="font-fredoka text-xl md:text-2xl font-bold mb-1">{{ char.name_ar }}</h3>
+                    {% if char.name_en %}<p class="text-white/80 text-xs mb-2">{{ char.name_en }}</p>{% endif %}
+                    <div class="flex items-center justify-between gap-2 flex-wrap">
+                        <span class="bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap">
+                            {{ "{:,.0f}".format(char.price_per_hour) }} جنيه/ساعة
+                        </span>
+                        <a href="/booking?character={{ char.id }}" class="bg-white text-primary px-3 py-1 rounded-full text-xs font-bold hover:scale-110 transition-transform">
+                            احجز الآن
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if not characters %}
+        <div class="text-center py-20">
+            <div class="text-6xl mb-4">🎭</div>
+            <p class="text-gray-500 text-lg">لا توجد شخصيات في هذه الفئة حالياً</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Info Section -->
+<section class="py-16 bg-gradient-to-br from-secondary/10 to-magic/10">
+    <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div class="text-center p-6" data-aos="fade-up">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-primary to-magic flex items-center justify-center text-white text-3xl">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="font-fredoka font-bold text-xl mb-2">أزياء عالية الجودة</h3>
+                <p class="text-gray-600">جميع الأزياء أصلية ومعتمدة، نظيفة ومُعقّمة قبل كل حفلة.</p>
+            </div>
+            <div class="text-center p-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-secondary to-accent flex items-center justify-center text-white text-3xl">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <h3 class="font-fredoka font-bold text-xl mb-2">فنانون محترفون</h3>
+                <p class="text-gray-600">الفنانون مدرّبون على التعامل مع الأطفال وتقديم تجربة آمنة وممتعة.</p>
+            </div>
+            <div class="text-center p-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-accent to-primary flex items-center justify-center text-white text-3xl">
+                    <i class="fas fa-magic"></i>
+                </div>
+                <h3 class="font-fredoka font-bold text-xl mb-2">عروض تفاعلية</h3>
+                <p class="text-gray-600">رقص، ألعاب، وقصص ممتعة تشد انتباه الأطفال طوال الحفلة.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Character filter (uses gallery-filter-btn structure)
+    const charBtns = document.querySelectorAll('.char-filter-btn');
+    const charItems = document.querySelectorAll('.char-item');
+
+    charBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filter = btn.dataset.filter;
+            charBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            charItems.forEach(item => {
+                const matches = filter === 'all' || item.dataset.category === filter;
+                if (matches) {
+                    item.style.display = '';
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'scale(1)';
+                    }, 50);
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'scale(0.8)';
+                    setTimeout(() => { item.style.display = 'none'; }, 300);
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
